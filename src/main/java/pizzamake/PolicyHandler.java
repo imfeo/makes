@@ -41,9 +41,11 @@ public class PolicyHandler{
 
         if(orderCanceled.isMe()){
             Make make = makeRepository.findByOrderId(orderCanceled.getId());
-            make.setOrderId(orderCanceled.getId());
-            make.setStatus("CANCELLED");
-            makeRepository.save(make);
+            if(make != null) {
+                make.setOrderId(orderCanceled.getId());
+                make.setStatus("CANCELLED");
+                makeRepository.save(make);
+            }
         }
     }
 
